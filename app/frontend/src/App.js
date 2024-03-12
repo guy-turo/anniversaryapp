@@ -1,8 +1,8 @@
-import React ,{useState} from 'react'
-import Navbar from './components/navbar/Navbar'
+import React from 'react'
+import NavbarComponent from './components/navbar/NavbarComponent'
 import Contact from './components/contact/Contact';
 import Main from './components/main/Main';
-import './App.css';
+
 
 
 const fakeProfileDB= {
@@ -28,25 +28,19 @@ const fakeProfileDB= {
         phoneNUmber:"23342345"
       }
     ]
-   
   }
 
 
 const App=()=> {
-  const [profile,setProfile]= useState(fakeProfileDB);
-  
-  const clickMe=()=>{
-    setProfile('')
-  }
 
   return (
-    <div className="App" >
-      <Navbar name={profile.name} 
-        nameLink={profile.profileImgUrl} 
-        clickMe={clickMe}/>
+   <div>
+    <NavbarComponent/>
+    <section className="flex justify-between p-0"> 
       <Contact/>
       <Main/>
-    </div>
+    </section>
+   </div>
   );
 }
 
