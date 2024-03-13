@@ -32,14 +32,17 @@ const fakeProfileDB= {
 
 
 const App=()=> {
-
   return (
-   <div>
-    <NavbarComponent/>
-    <section className="flex justify-between p-0"> 
-      <Contact/>
-      <Main/>
-    </section>
+   <div className="flex flex-col p-0 pb-10 overflow-auto   bg-gray-100 h-lvh">
+      <NavbarComponent/>
+      <section className="flex  flex-col md:flex-row  justify-evenly p-5  items-center"> 
+        <Contact/>
+        <Main/>
+      </section>
+      <div className="flex divide-x-8 divide-y-8 bg-black mx-10 h-[2px] mt-3"></div>
+        <p className="mt-5 text-gray-400 px-10">
+          © 2021 Kodilux, Inc. All rights reserved.
+        </p>
    </div>
   );
 }

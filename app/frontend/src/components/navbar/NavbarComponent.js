@@ -17,9 +17,10 @@ import {
 
 const profileMenuItems=[
   {
-    label:"Edit Profile",
+    label:"Profile",
     icon:Cog6ToothIcon,
   },
+  
   {
     label:"Sign Out",
     icon:PowerIcon,
@@ -91,21 +92,16 @@ function ProfileMenu() {
 
 const NavbarComponent=()=> {
   return (
-    <Navbar className="  mx-auto max-w-screen-xl p-2  lg:pl-6 bg-gray-100 text- md:pl-4 ms:pl-2">
-      <div className="relative mx-auto flex items-center justify-between text-blue-gray-900">
-        <div><strong>Anniversary reminder</strong></div>
+    <div className="mx-auto max-w-screen-xl w-full flex justify-between items-center p-2  lg:pl-6 bg-blue-700 text-white  md:pl-4 ms:pl-2">
+      <div><strong>Anniversary reminder</strong></div>
         <div className="flex items-center">
-        <Button size="sm" variant="text" className="mr-3">
-          <p>Guy-james</p>
-        </Button>
-        <ProfileMenu />
+          <Button size="sm" variant="text" className="mr-3">
+          </Button>
+          <ProfileMenu />
         </div>
-     
- 
-       
-      </div>
-     
-    </Navbar>
+    </div>
+
+   
   );
 }
 
