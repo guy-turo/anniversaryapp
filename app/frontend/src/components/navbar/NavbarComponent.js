@@ -58,8 +58,7 @@ function ProfileMenu() {
       <MenuList className="p-1">
         {profileMenuItems.map(({ label, icon }, key) => {
           const isLastItem = key === profileMenuItems.length - 1;
-          const edit = key===profileMenuItems[0]
-          console.log(edit)
+          
           return (
             <MenuItem
               key={label}

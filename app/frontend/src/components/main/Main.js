@@ -15,10 +15,10 @@ const Main=()=> {
        <p className="flex md:text-8xl text-6xl">:00:</p>
        <p className="flex md:text-8xl text-6xl">00</p>
      </div>
-      <div className="flex flex-col justify-evenly items-center h-2/6 ">
+      <div className="flex flex-col justify-evenly  items-center h-2/6 ">
         <textarea name="Text1" cols="80" rows="3" value={message} onChange={(e)=>setMessage(e.target.value)} className="rounded p-1 sm:w-1/ w-[300px] md:w-[60px] lg:w-4/6"></textarea>
-        <div className="flex justify-evenly md:w-3/4 w-4/4 px-2 space-x-1">
-          <button className="bg-yellow-800 w-60 rounded-md text-h text-white h-8"  onClick={()=>setOpen(!open)}>AI personalization</button>
+        <div className="flex justify-evenly  md:w-3/4 w-4/4 px-10 md:px-2 space-x-1">
+          <button className="bg-yellow-800  w-40 md:w-60 rounded-md text-h text-white h-8"  onClick={()=>setOpen(!open)}>AI personalization</button>
           <DialogHelper open={open} onClose={handleClose} >
           <div className=' pt-3 w-[600px] rounded-3xl px-10 h-[400px] flex flex-col justify-evenly shadow-lg bg-slate-100'>
             <div className="w-full h-[300px]  rounded-3xl bg-white border-black border-2  flex place-items-center">
