@@ -1,8 +1,9 @@
-import React ,{useState} from 'react'
-import Navbar from './components/navbar/Navbar'
+import React from 'react'
+import NavbarComponent from './components/navbar/NavbarComponent'
 import Contact from './components/contact/Contact';
 import Main from './components/main/Main';
-import './App.css';
+import {Provider} from 'react-redux'
+import store from './redux/storeReducer'
 
 
 const fakeProfileDB= {
@@ -28,25 +29,26 @@ const fakeProfileDB= {
         phoneNUmber:"23342345"
       }
     ]
-   
   }
 
 
 const App=()=> {
-  const [profile,setProfile]= useState(fakeProfileDB);
-  
-  const clickMe=()=>{
-    setProfile('')
-  }
-
   return (
-    <div className="App" >
-      <Navbar name={profile.name} 
-        nameLink={profile.profileImgUrl} 
-        clickMe={clickMe}/>
-      <Contact/>
-      <Main/>
-    </div>
+
+    <Provider store={store}>
+      <div className="flex flex-col p-0 pb-10 overflow-auto   bg-gray-100 h-fit">
+      <NavbarComponent/>
+      <section className="flex  flex-col md:flex-row  justify-evenly p-5  items-center"> 
+        <Contact/>
+        <Main/>
+      </section>
+      <div className="flex divide-x-8 divide-y-8 bg-gray-300 mx-10 h-[1px] mt-3"></div>
+        <p className="mt-5 text-gray-400 px-10">
+          © 2021 Kodilux, Inc. All rights reserved.
+        </p>
+   </div>
+    </Provider>
+   
   );
 }
 
