@@ -43,7 +43,7 @@ const App=()=> {
         <Main/>
       </section>
       <div className="flex divide-x-8 divide-y-8 bg-gray-300 mx-10 h-[1px] mt-3"></div>
-        <p className="mt-5 text-gray-400 px-10">
+        <p className="mt-5 text-gray-400 px-10 self-center md:self-start">
           © 2021 Kodilux, Inc. All rights reserved.
         </p>
    </div>

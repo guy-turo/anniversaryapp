@@ -1,40 +1,52 @@
-import { ADD_CONTACT, REMOVE_CONTACT } from "./action_types"
-import { contactList } from "../../components/contact/Contact"
+import { ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, ADD_CONTACT_REQUEST, FETCH_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, } from "./action_types"
 
 const initialState = {
-    id: null,
-    fullName: "",
-    phoneNumber: "",
-    selected: false
+    loading: false,
+    data: [],
+    error: ''
 }
 
 const contactReducer = (state = initialState, action) => {
     switch (action.type) {
-        case ADD_CONTACT:
-            const newId = contactList.id + 1
-            const newFullName = state.fullName = action.payload.fullNameData
-            const newPhoneNumber = state.phoneNumber = action.phoneNumberData
-            const newSelectedContact = state.selected
-            contactList.push(
-                newId,
-                newFullName,
-                newPhoneNumber,
-                newSelectedContact
-            )
-
+        case ADD_CONTACT_SUCCESS:
+            const msg = action.payload
             return {
                 ...state,
-                id: newId,
-                fullName: newFullName,
-                phoneNumber: newPhoneNumber,
-                selected: newSelectedContact
+                loading: false,
+                data: msg,
+                error: ''
             }
-        case REMOVE_CONTACT:
-            const store = []
-            const selectedItem = state.selected === true
-            store.push(selectedItem)
-            console.log(`removed contact ${store}`)
-            return
+        case ADD_CONTACT_REQUEST:
+            return {
+                ...state,
+                loading: true
+            }
+        case ADD_CONTACT_FAILURE:
+            const errMsg = action.payload
+            return {
+                ...state,
+                loading: false,
+                data: errMsg
+            }
+            //Fetch Contact Reducer
+        case FETCH_CONTACT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case FETCH_CONTACT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                data: action.payload,
+                error: ''
+            }
+        case FETCH_CONTACT_FAILURE:
+            return {
+                loading: false,
+                data: [],
+                error: action.payload
+            }
         default:
             return state
     }
