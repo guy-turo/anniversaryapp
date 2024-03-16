@@ -1,8 +1,7 @@
 import React from 'react'
-import isReachable from 'is-reachable'
 import App from './App'
-const URL='google.com:403'
-const EVERY_SECOND=1000
+import {Provider} from 'react-redux'
+import store from './redux/storeReducer'
 
 export default class Main extends React.PureComponent{
   
@@ -23,7 +22,8 @@ export default class Main extends React.PureComponent{
   }
   render(){
     return(
-      <div>
+      <Provider store={store}>
+         <div>
         {this.state.online?
         (<App/>):
         (
@@ -37,6 +37,8 @@ export default class Main extends React.PureComponent{
           
           </div>)}
       </div>
+      </Provider>
+     
     )
   }
 }

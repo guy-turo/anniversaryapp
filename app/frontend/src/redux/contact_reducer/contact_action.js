@@ -7,37 +7,34 @@ export const addContactRequest = () => {
         type: ADD_CONTACT_REQUEST
     }
 }
-export const addContactSuccess = (message) => {
+export const addContactSuccess = () => {
     return {
         type: ADD_CONTACT_SUCCESS,
-        payload: message
     }
 }
-export const addContactFailure = (error) => {
+export const addContactFailure = () => {
     return {
         type: ADD_CONTACT_FAILURE,
-        payload: error
     }
 }
 
-export const addContact = (fullNameData, phoneNumberData, emailAddressData) => {
-        const uri = 'https://localhost:8000/api/v1/contact'
+export const addContact = (fullNameData, emailAddressData) => {
+        const uri = 'http://localhost:8000/api/v1/contact/addContact'
         return (dispatch) => {
             dispatch(addContactRequest)
-            axios.post(uri, {
-                    params: {
-                        fullName: fullNameData,
-                        phoneNumber: phoneNumberData,
-                        emailAddress: emailAddressData,
-                    }
-                })
+            axios.post(
+                    uri, {
+                        "fullName": fullNameData,
+                        "emailAddress": emailAddressData,
+                    },
+                )
                 .then((result) => {
-                    const data = result.data
-                    dispatch(addContactSuccess(data))
+                    //const data = result.data
+                    dispatch(addContactSuccess)
                 })
                 .catch((error) => {
-                    const msg = error.message
-                    dispatch(addContactFailure(msg))
+                    // const msg = error.message
+                    dispatch(addContactFailure)
                 })
 
 

@@ -1,19 +1,24 @@
 const mongoose = require('mongoose')
 const Contact = require('../models/contact')
 const { StatusCodes } = require('http-status-codes')
+const fs = require('fs')
+const path = require('path')
+const upload = require('../utility/helper')
+
 
 const createContact = async(req, res) => {
-    const { fullName, phoneNumber, email } = req.query
+    console.log(req.body)
+    try {
+        const newContact = new Contact({
+            fullName: req.body.fullName,
+            emailAddress: req.body.emailAddress
+        })
+        newContact.save()
+            .then((result) => res.status(StatusCodes.CREATED).json(result))
+            .catch((error) => console.error(error))
+        console.log(fullName, phoneNumber, email)
+    } catch (error) { console.error(error) }
 
-    const newContact = new Contact({
-        fullName: fullName,
-        phoneNumber: phoneNumber,
-        emailAddress: email,
-    })
-    newContact.save()
-        .then((result) => res.status(StatusCodes.CREATED).json(result))
-        .catch((error) => console.error(error))
-    console.log(fullName, phoneNumber, email)
 
 }
 const getAllContact = async(req, res) => {
