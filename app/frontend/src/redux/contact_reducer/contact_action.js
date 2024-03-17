@@ -1,7 +1,7 @@
-import { ADD_CONTACT_REQUEST, ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, FETCH_CONTACT_FAILURE } from "./action_types"
+import { UPDATE_CONTACT_FAILURE, UPDATE_CONTACT_REQUEST, UPDATE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE, DELETE_CONTACT_SUCCESS, DELETE_CONTACT_REQUEST, ADD_CONTACT_REQUEST, ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, FETCH_CONTACT_FAILURE } from "./action_types"
 import axios from 'axios'
 
-
+//Create contact
 export const addContactRequest = () => {
     return {
         type: ADD_CONTACT_REQUEST
@@ -59,21 +59,93 @@ export const fetchContactFailure = (error) => {
     }
 }
 export const fetchContacts = () => {
+        return (dispatch) => {
+            setTimeout(() => {
+                dispatch(fetchContactRequest)
+            }, 1000)
+
+
+            const URI = 'http://localhost:8000/api/v1/contact'
+            axios.get(URI, )
+                .then((response) => {
+                    const data = response.data
+                    dispatch(fetchContactSuccess(data))
+                }).catch((error) => {
+                    console.error(error.message)
+                    dispatch(fetchContactFailure(error.message))
+                })
+
+        }
+    }
+    // Delete contact
+
+export const deleteContactRequest = () => {
+    return {
+        type: DELETE_CONTACT_REQUEST
+    }
+}
+export const deleteContactSuccess = () => {
+    return {
+        type: DELETE_CONTACT_SUCCESS,
+    }
+}
+export const deleteContactFailure = () => {
+    return {
+        type: DELETE_CONTACT_FAILURE,
+    }
+}
+export const deleteContact = (id) => {
+        const uri = `http://localhost:8000/api/v1/contact/${id}`
+        return (dispatch) => {
+            dispatch(deleteContactRequest)
+            axios.delete(
+                    uri,
+                )
+                .then((result) => {
+                    //const data = result.data
+                    dispatch(deleteContactSuccess)
+                })
+                .catch((error) => {
+                    // const msg = error.message
+                    dispatch(deleteContactFailure)
+                })
+
+
+        }
+    }
+    //Update contact 
+
+export const updateContactRequest = () => {
+    return {
+        type: UPDATE_CONTACT_REQUEST
+    }
+}
+export const updateContactSuccess = () => {
+    return {
+        type: UPDATE_CONTACT_SUCCESS,
+    }
+}
+export const updateContactFailure = () => {
+    return {
+        type: UPDATE_CONTACT_FAILURE,
+    }
+}
+export const updateContact = (id) => {
+    const uri = `http://localhost:8000/api/v1/contact/${id}`
     return (dispatch) => {
-        setTimeout(() => {
-            dispatch(fetchContactRequest)
-        }, 1000)
-
-
-        const URI = 'http://localhost:8000/api/v1/contact'
-        axios.get(URI, )
-            .then((response) => {
-                const data = response.data
-                dispatch(fetchContactSuccess(data))
-            }).catch((error) => {
-                console.error(error.message)
-                dispatch(fetchContactFailure(error.message))
+        dispatch(deleteContactRequest)
+        axios.delete(
+                uri,
+            )
+            .then((result) => {
+                //const data = result.data
+                dispatch(deleteContactSuccess)
             })
+            .catch((error) => {
+                // const msg = error.message
+                dispatch(deleteContactFailure)
+            })
+
 
     }
 }

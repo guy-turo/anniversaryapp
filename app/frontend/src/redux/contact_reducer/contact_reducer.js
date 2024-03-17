@@ -1,4 +1,4 @@
-import { ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, ADD_CONTACT_REQUEST, FETCH_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, } from "./action_types"
+import { UPDATE_CONTACT_FAILURE, UPDATE_CONTACT_REQUEST, UPDATE_CONTACT_SUCCESS, DELETE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE, DELETE_CONTACT_REQUEST, ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, ADD_CONTACT_REQUEST, FETCH_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, } from "./action_types"
 
 const initialState = {
     loading: false,
@@ -8,12 +8,11 @@ const initialState = {
 
 const contactReducer = (state = initialState, action) => {
     switch (action.type) {
+        //Create contact reducer
         case ADD_CONTACT_SUCCESS:
-            const msg = action.payload
             return {
                 ...state,
                 loading: false,
-                data: msg,
                 error: ''
             }
         case ADD_CONTACT_REQUEST:
@@ -22,11 +21,9 @@ const contactReducer = (state = initialState, action) => {
                 loading: true
             }
         case ADD_CONTACT_FAILURE:
-            const errMsg = action.payload
             return {
                 ...state,
                 loading: false,
-                data: errMsg
             }
             //Fetch Contact Reducer
         case FETCH_CONTACT_REQUEST:
@@ -42,6 +39,43 @@ const contactReducer = (state = initialState, action) => {
                 error: ''
             }
         case FETCH_CONTACT_FAILURE:
+            return {
+                loading: false,
+                data: [],
+                error: action.payload
+            }
+            //Delete contact
+        case DELETE_CONTACT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case DELETE_CONTACT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                error: ''
+            }
+        case DELETE_CONTACT_FAILURE:
+            return {
+                loading: false,
+                data: [],
+                error: action.payload
+            }
+            //Update contact
+        case UPDATE_CONTACT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case UPDATE_CONTACT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+
+                error: ''
+            }
+        case UPDATE_CONTACT_FAILURE:
             return {
                 loading: false,
                 data: [],
