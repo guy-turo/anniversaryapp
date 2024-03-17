@@ -1,25 +1,24 @@
 const mongoose = require('mongoose')
 const Contact = require('../models/contact')
 const { StatusCodes } = require('http-status-codes')
-const fs = require('fs')
-const path = require('path')
-const upload = require('../utility/helper')
+
+
+
+const { ObjectId } = require("mongodb");
 
 
 const createContact = async(req, res) => {
-    console.log(req.body)
+    const { fullName: fullName, emailAddress: emailAddress } = req.body
     try {
         const newContact = new Contact({
-            fullName: req.body.fullName,
-            emailAddress: req.body.emailAddress
+            fullName: fullName,
+            emailAddress: emailAddress
         })
         newContact.save()
             .then((result) => res.status(StatusCodes.CREATED).json(result))
             .catch((error) => console.error(error))
-        console.log(fullName, phoneNumber, email)
-    } catch (error) { console.error(error) } finally {
-        await Contact.close()
-    }
+        console.log(fullName, emailAddress)
+    } catch (error) { console.error(error) }
 
 
 }
@@ -37,13 +36,25 @@ const getAllContact = async(req, res) => {
     }
 
 }
-
 const getContact = async(req, res) => {
-
-    res.json({ msg: 'get Contact' })
+    res.json({ msg: 'getContact' })
 }
 const updateContact = async(req, res) => {
-    res.json({ msg: "update contact" })
+    const { fullName: fullName, emailAddress: emailAddress } = req.body
+    const contactId = req.params.id
+    const checkData = await Contact.findById({ _id: contactId })
+
+    try {
+        const newData = { $set: { fullName: fullName, emailAddress: emailAddress } }
+        const update = await Contact.updateMany({ _id: contactId }, newData)
+        if (update) {
+            console.log('items has been updated')
+            res.json({ msg: "contact has been updated" })
+        }
+    } catch (error) {
+        console.error(error.message)
+    }
+
 }
 const deleteContact = async(req, res) => {
     const { _id: idContact } = req.params

@@ -47,6 +47,7 @@ export const fetchContactRequest = () => {
     }
 }
 export const fetchContactSuccess = (contacts) => {
+
     return {
         type: FETCH_CONTACT_SUCCESS,
         payload: contacts
@@ -60,11 +61,7 @@ export const fetchContactFailure = (error) => {
 }
 export const fetchContacts = () => {
         return (dispatch) => {
-            setTimeout(() => {
-                dispatch(fetchContactRequest)
-            }, 1000)
-
-
+            dispatch(fetchContactRequest)
             const URI = 'http://localhost:8000/api/v1/contact'
             axios.get(URI, )
                 .then((response) => {
@@ -130,20 +127,23 @@ export const updateContactFailure = () => {
         type: UPDATE_CONTACT_FAILURE,
     }
 }
-export const updateContact = (id) => {
+export const updateContact = (id, fullName, emailAddress) => {
     const uri = `http://localhost:8000/api/v1/contact/${id}`
     return (dispatch) => {
-        dispatch(deleteContactRequest)
-        axios.delete(
-                uri,
+        dispatch(updateContactRequest)
+        axios.put(
+                uri, {
+                    fullName: fullName,
+                    emailAddress: emailAddress
+                }
             )
             .then((result) => {
                 //const data = result.data
-                dispatch(deleteContactSuccess)
+                dispatch(updateContactSuccess)
             })
             .catch((error) => {
                 // const msg = error.message
-                dispatch(deleteContactFailure)
+                dispatch(updateContactFailure)
             })
 
 

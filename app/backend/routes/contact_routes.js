@@ -12,7 +12,7 @@ ContactRouter.route('/addContact', )
 
 ContactRouter.route('/:id')
     .get(getContact)
-    .patch(updateContact)
+    .put(updateContact)
     .delete(deleteContact)
 
 module.exports = { ContactRouter }
