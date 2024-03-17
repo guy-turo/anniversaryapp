@@ -16,7 +16,7 @@ const Contact=({fetchContacts,contactData, addContact, deleteContact})=> {
 
   const [fullNameData, setFullNameData]=useState('')
   const [emailAddressData, setEmailAddressData]=useState('')
-  
+
 
   const hasNotData=contactData.data.length ===0
   console.log(fullNameData,emailAddressData)
@@ -24,7 +24,7 @@ const Contact=({fetchContacts,contactData, addContact, deleteContact})=> {
 
   const handleDelete=( id)=>{
     
-    deleteContact(id)
+   deleteContact(id)
     
   }
   const handleSave=(e)=>{
@@ -87,17 +87,16 @@ const Contact=({fetchContacts,contactData, addContact, deleteContact})=> {
         {hasNotData && <div className="flex items-center font-semibold justify-center">Loading...</div>}
       {contactData.error && <div className='flex items-center font-semibold justify-center text-red-500'>some error</div>}
           {contactData && contactData.data && contactData.data?.map((e,index)=>
-          (<li key={index} className="flex justify-between px-3.5 py-2 bg-white my-2 rounded ">
-            <div className="flex flex-row  items-center space-x-4">
-            <div className="border rounded-full border-gray-900 p-0.5 w-10 h-10">
-              <img src={profile}
-            alt="tania andrew" className='rounded-full'/>
-            </div>
-            <div className="overflow-clip">
-            <h3 className='text-gray-600 font-semibold' >{e.fullName} </h3>
-            <p className="text-gray-500">{e.emailAddress}</p>
-            </div>
-            </div>
+          (<li key={index} className="flex space-x-2 justify-between px-3.5 py-2 bg-white my-2 rounded ">
+              <div className="flex flex-row justify-between overflow-clip  items-center space-x-3">
+                <div className="border rounded-full border-gray-900 p-0.5 w-10 h-10">
+                  <img src={profile} alt="" className='rounded-full w-full h-full'/>
+                </div>
+                <div className="overflow-auto w-fit ">
+                  <h3 className='text-gray-600 font-semibold overflow-clip' >{e.fullName} </h3>
+                  <p className="text-gray-500">{e.emailAddress}</p>
+                </div>
+              </div>
             
             <DeleteContactDialog data={contactData.data[index]} handleDelete={handleDelete}/>
           </li>))}

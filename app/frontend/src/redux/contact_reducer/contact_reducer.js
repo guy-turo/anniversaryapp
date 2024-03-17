@@ -1,4 +1,4 @@
-import { DELETE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE, DELETE_CONTACT_REQUEST, ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, ADD_CONTACT_REQUEST, FETCH_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, } from "./action_types"
+import { UPDATE_CONTACT_FAILURE, UPDATE_CONTACT_REQUEST, UPDATE_CONTACT_SUCCESS, DELETE_CONTACT_SUCCESS, DELETE_CONTACT_FAILURE, DELETE_CONTACT_REQUEST, ADD_CONTACT_SUCCESS, ADD_CONTACT_FAILURE, ADD_CONTACT_REQUEST, FETCH_CONTACT_FAILURE, FETCH_CONTACT_REQUEST, FETCH_CONTACT_SUCCESS, } from "./action_types"
 
 const initialState = {
     loading: false,
@@ -57,6 +57,25 @@ const contactReducer = (state = initialState, action) => {
                 error: ''
             }
         case DELETE_CONTACT_FAILURE:
+            return {
+                loading: false,
+                data: [],
+                error: action.payload
+            }
+            //Update contact
+        case UPDATE_CONTACT_REQUEST:
+            return {
+                ...state,
+                loading: true,
+            }
+        case UPDATE_CONTACT_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+
+                error: ''
+            }
+        case UPDATE_CONTACT_FAILURE:
             return {
                 loading: false,
                 data: [],
